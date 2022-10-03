@@ -62,20 +62,19 @@ int length() {
     return length;
 };
 
-float getMaxWL(){
+float getMaxWL(struct node *node){
 
-    struct node *ptr = head;
     float listMax = 0.00;
 
-    while (ptr != NULL){
-        if(listMax < (ptr->stockVal)) listMax = ptr->stockVal;
-        ptr = ptr->next;
+    while (node != NULL){
+        if(listMax < (node->stockVal)) listMax = node->stockVal;
+        node = node->next;
     };
 
     return listMax;
 };
 
-float getMaxRC(float listMax, struct node *node){
+float getMaxRC(float listMax, struct node *node) {
 
     if(node == NULL) {
         return listMax;
@@ -83,8 +82,8 @@ float getMaxRC(float listMax, struct node *node){
     else if (listMax < (node->stockVal)){
         listMax = node->stockVal;
     };
-    return getMaxRC(listMax, node->next);
 
+    return getMaxRC(listMax, node->next);
 };
 
 
@@ -103,9 +102,9 @@ int main() {
 
     printList();
     printf("\nList Length = %d\n", length());
-    printf("\nList Max with While Loop = %.2f\n", getMaxWL());
+    printf("\nList Max with While Loop = %.2f\n", getMaxWL(head));
     printf("\nList Max Recursively = %.2f\n", getMaxRC(0.0, head));
     printf("\n");
 
-    return 0;
+    return -1;
 };
