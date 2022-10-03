@@ -1,8 +1,3 @@
-/*
- Implementation Reference:
- https://www.tutorialspoint.com/data_structures_algorithms/linked_list_program_in_c.htm
-*/
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -62,6 +57,7 @@ int length() {
     return length;
 };
 
+// iterative approach to find the maximum value
 float getMaxWL(struct node *node){
 
     float listMax = 0.00;
@@ -74,6 +70,7 @@ float getMaxWL(struct node *node){
     return listMax;
 };
 
+// recursive approach to finding the maximum
 float getMaxRC(float listMax, struct node *node) {
 
     if(node == NULL) {
@@ -91,10 +88,9 @@ float getMaxRC(float listMax, struct node *node) {
 int main() {
 
     float x;
-    // insert 52 float values to the List representing the stock values
+    // populate the list with 52 values representing the stock prices
     for (int i = 0; i < 52; i++){
         x = ((float)rand()/RAND_MAX + 3.5) * 5.3;
-        //printf("%.2f, ", x);
         insertFirst(x);
     };
 
@@ -106,5 +102,5 @@ int main() {
     printf("\nList Max Recursively = %.2f\n", getMaxRC(0.0, head));
     printf("\n");
 
-    return -1;
+    return 0;
 };
