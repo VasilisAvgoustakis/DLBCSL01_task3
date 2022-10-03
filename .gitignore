@@ -1,1 +1,6 @@
 /linkedList
+.vscode/tasks.json
+.gitignore
+linkedList.dSYM/Contents/Resources/DWARF/linkedList
+.gitignore
+linkedList.dSYM/Contents/Info.plist

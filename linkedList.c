@@ -9,21 +9,21 @@
 
 // linke list implementation
 
-struct element {
+struct node {
     float stockVal;
-    struct element *next;
+    struct node *next;
 };
 
-
-struct element *head = NULL;
-struct element *current = NULL;
+//struct node list[52];
+struct node *head = NULL;
+struct node *current = NULL;
 
 
 // display the list
 void printList () {
-    struct element *ptr = head;
+    struct node *ptr = head;
 
-    printf("\n[ \n");
+    printf("\n[ ");
 
     // start from the top
     while (ptr != NULL){
@@ -31,39 +31,40 @@ void printList () {
         ptr = ptr->next;
     };
 
-    printf(" ]");
+    printf(" ]\n");
 };
 
 // insert link at the first location
 void insertFirst(float value) {
 
     // create a link 
-    struct element *link = (struct element*) malloc(sizeof(struct element));
+    struct node *link = (struct node*) malloc(sizeof(struct node));
 
     link->stockVal = value;
 
-    // point to old first element
+    // point to old first node
     link->next = head;
 
-    // point first to new first element
+    // point first to new first node
     head = link;
 };
 
 // get list length
 int length() {
     int length = 0;
-    struct element *current;
+    //struct node *curr;
 
     for(current = head; current != NULL; current = current->next){
+        // printf("%.2f, ", current->stockVal);
         length++;
     };
 
     return length;
 };
 
-float getMax(){
+float getMaxWL(){
 
-    struct element *ptr = head;
+    struct node *ptr = head;
     float listMax = 0.00;
 
     while (ptr != NULL){
@@ -74,12 +75,24 @@ float getMax(){
     return listMax;
 };
 
+float getMaxRC(float listMax, struct node *node){
+
+    if(node == NULL) {
+        return listMax;
+    }
+    else if (listMax < (node->stockVal)){
+        listMax = node->stockVal;
+    };
+    return getMaxRC(listMax, node->next);
+
+};
+
 
 // main program
-void main() {
+int main() {
 
     float x;
-    
+    // insert 52 float values to the List representing the stock values
     for (int i = 0; i < 52; i++){
         x = ((float)rand()/RAND_MAX + 3.5) * 5.3;
         //printf("%.2f, ", x);
@@ -88,8 +101,11 @@ void main() {
 
     printf("\n\nHere is the List: \n");
 
-   printList();
-   printf("\nList Length = %d\n", length());
-   printf("List Max = %.2f\n", getMax());
-   printf("\n");
+    printList();
+    printf("\nList Length = %d\n", length());
+    printf("\nList Max with While Loop = %.2f\n", getMaxWL());
+    printf("\nList Max Recursively = %.2f\n", getMaxRC(0.0, head));
+    printf("\n");
+
+    return 0;
 };
